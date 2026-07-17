@@ -1,0 +1,157 @@
+<div class="dashboard-shell">
+  <div class="row g-4">
+    <div class="col-lg-3">
+      <div class="sidebar">
+        <h5 class="fw-bold mb-3">Admin Panel</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link" ng-class="{active: activeTab === 'dashboard'}" href="" ng-click="activeTab='dashboard'"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" ng-class="{active: activeTab === 'add'}" href="" ng-click="activeTab='add'"><i class="bi bi-plus-circle me-2"></i>Add Question</a></li>
+          <li class="nav-item"><a class="nav-link" ng-class="{active: activeTab === 'list'}" href="" ng-click="activeTab='list'"><i class="bi bi-card-list me-2"></i>Manage Questions</a></li>
+          <li class="nav-item"><a class="nav-link" ng-class="{active: activeTab === 'students'}" href="" ng-click="activeTab='students'"><i class="bi bi-people me-2"></i>Manage Students</a></li>
+          <li class="nav-item"><a class="nav-link" ng-class="{active: activeTab === 'exams'}" href="" ng-click="activeTab='exams'"><i class="bi bi-journal-text me-2"></i>Manage Exams</a></li>
+          <li class="nav-item"><a class="nav-link" ng-class="{active: activeTab === 'results'}" href="" ng-click="activeTab='results'"><i class="bi bi-bar-chart me-2"></i>View Results</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-lg-9">
+      <div class="row g-4 mb-4" ng-if="activeTab === 'dashboard'">
+        <div class="col-md-4">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Questions</p>
+            <h3 class="fw-bold">{{ analytics.totalQuestions }}</h3>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Students</p>
+            <h3 class="fw-bold">{{ analytics.totalStudents }}</h3>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Pass Rate</p>
+            <h3 class="fw-bold">{{ analytics.passRate }}%</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card" ng-if="activeTab === 'add'">
+        <h5 class="fw-bold mb-3">Add / Edit Question</h5>
+        <form ng-submit="form.id ? updateQuestion() : addQuestion()">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Subject</label>
+              <select class="form-select" ng-model="form.subject">
+                <option>HTML</option><option>CSS</option><option>JavaScript</option><option>AngularJS</option><option>C Programming</option><option>Java</option><option>DBMS</option><option>Operating System</option><option>Computer Networks</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Difficulty</label>
+              <select class="form-select" ng-model="form.difficulty">
+                <option>Easy</option><option>Medium</option><option>Hard</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Marks</label>
+              <input class="form-control" type="number" ng-model="form.marks" />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Question</label>
+              <textarea class="form-control" rows="3" ng-model="form.question"></textarea>
+            </div>
+            <div class="col-md-6" ng-repeat="option in form.options track by $index">
+              <label class="form-label">Option {{ $index + 1 }}</label>
+              <input class="form-control" ng-model="form.options[$index]" />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Correct Answer Index</label>
+              <input class="form-control" type="number" ng-model="form.correctAnswer" min="0" max="3" />
+            </div>
+          </div>
+          <button class="btn btn-primary mt-3" type="submit">{{ form.id ? 'Update Question' : 'Add Question' }}</button>
+        </form>
+      </div>
+
+      <div class="admin-card" ng-if="activeTab === 'list'">
+        <div class="d-flex justify-content-between flex-wrap gap-2 mb-3">
+          <h5 class="fw-bold mb-0">Question Bank</h5>
+          <div class="d-flex gap-2">
+            <input class="form-control" placeholder="Search questions" ng-model="searchText" />
+            <select class="form-select" ng-model="subjectFilter">
+              <option>All</option><option>HTML</option><option>CSS</option><option>JavaScript</option><option>AngularJS</option><option>C Programming</option><option>Java</option><option>DBMS</option><option>Operating System</option><option>Computer Networks</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr><th>Subject</th><th>Question</th><th>Difficulty</th><th>Marks</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="question in filteredQuestions()">
+                <td>{{ question.subject }}</td>
+                <td>{{ question.question }}</td>
+                <td>{{ question.difficulty }}</td>
+                <td>{{ question.marks }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary me-2" ng-click="editQuestion(question)">Edit</button>
+                  <button class="btn btn-sm btn-outline-danger" ng-click="deleteQuestion(question)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="admin-card" ng-if="activeTab === 'students'">
+        <h5 class="fw-bold mb-3">Manage Students</h5>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center" ng-repeat="user in users | filter:{role:'student'}">
+            <span>{{ user.name }} ({{ user.username }})</span>
+            <span class="badge bg-primary-subtle text-primary">{{ user.department || 'Student' }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="admin-card" ng-if="activeTab === 'results'">
+        <h5 class="fw-bold mb-3">Results Overview</h5>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center" ng-repeat="result in results | limitTo: 8">
+            <span>{{ result.examTitle }}</span>
+            <span class="fw-bold">{{ result.score }} / {{ result.correctAnswers + result.wrongAnswers + result.unattemptedQuestions }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="admin-card" ng-if="activeTab === 'exams'">
+        <h5 class="fw-bold mb-3">Create Exam</h5>
+        <form ng-submit="addExam()">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Title</label>
+              <input class="form-control" ng-model="examForm.title" />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Subject</label>
+              <select class="form-select" ng-model="examForm.subject">
+                <option>HTML</option><option>CSS</option><option>JavaScript</option><option>AngularJS</option><option>C Programming</option><option>Java</option><option>DBMS</option><option>Operating System</option><option>Computer Networks</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Duration</label>
+              <input class="form-control" type="number" ng-model="examForm.duration" />
+            </div>
+          </div>
+          <button class="btn btn-primary mt-3" type="submit">Add Exam</button>
+        </form>
+        <ul class="list-group mt-4">
+          <li class="list-group-item d-flex justify-content-between align-items-center" ng-repeat="exam in exams">
+            <span>{{ exam.title }} ({{ exam.subject }})</span>
+            <span class="badge bg-primary-subtle text-primary">{{ exam.duration }} min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

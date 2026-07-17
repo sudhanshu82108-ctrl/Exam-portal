@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "subject": "HTML",
+    "difficulty": "Easy",
+    "question": "Which HTML tag is used to define the largest heading?",
+    "options": ["<h1>", "<head>", "<heading>", "<h6>"],
+    "correctAnswer": 0,
+    "marks": 1
+  },
+  {
+    "id": 2,
+    "subject": "CSS",
+    "difficulty": "Easy",
+    "question": "Which property is used to change the background color?",
+    "options": ["color", "background-color", "font-size", "border"],
+    "correctAnswer": 1,
+    "marks": 1
+  },
+  {
+    "id": 3,
+    "subject": "JavaScript",
+    "difficulty": "Medium",
+    "question": "Which keyword is used to declare a variable in JavaScript?",
+    "options": ["let", "function", "class", "return"],
+    "correctAnswer": 0,
+    "marks": 1
+  },
+  {
+    "id": 4,
+    "subject": "AngularJS",
+    "difficulty": "Medium",
+    "question": "AngularJS uses which core architectural pattern?",
+    "options": ["MVC", "MVVM", "MVP", "Singleton"],
+    "correctAnswer": 0,
+    "marks": 1
+  },
+  {
+    "id": 5,
+    "subject": "C Programming",
+    "difficulty": "Easy",
+    "question": "Which function is used to print output in C?",
+    "options": ["printf", "scan", "input", "echo"],
+    "correctAnswer": 0,
+    "marks": 1
+  },
+  {
+    "id": 6,
+    "subject": "Java",
+    "difficulty": "Medium",
+    "question": "Which keyword is used to inherit a class in Java?",
+    "options": ["implements", "extends", "inherits", "uses"],
+    "correctAnswer": 1,
+    "marks": 1
+  },
+  {
+    "id": 7,
+    "subject": "DBMS",
+    "difficulty": "Easy",
+    "question": "Which of the following is a DDL command?",
+    "options": ["SELECT", "UPDATE", "CREATE", "DELETE"],
+    "correctAnswer": 2,
+    "marks": 1
+  },
+  {
+    "id": 8,
+    "subject": "Operating System",
+    "difficulty": "Medium",
+    "question": "Which scheduling algorithm is preemptive?",
+    "options": ["FCFS", "Round Robin", "SJF", "Priority"],
+    "correctAnswer": 1,
+    "marks": 1
+  },
+  {
+    "id": 9,
+    "subject": "Computer Networks",
+    "difficulty": "Easy",
+    "question": "What does HTTP stand for?",
+    "options": ["Hyper Text Transfer Protocol", "High Transfer Text Protocol", "Hyper Tool Transfer Protocol", "Host Transfer Protocol"],
+    "correctAnswer": 0,
+    "marks": 1
+  },
+  {
+    "id": 10,
+    "subject": "HTML",
+    "difficulty": "Medium",
+    "question": "What does the alt attribute provide for an image?",
+    "options": ["Alternate text", "Link path", "Image size", "Border width"],
+    "correctAnswer": 0,
+    "marks": 1
+  }
+]

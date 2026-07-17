@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "name": "Admin User",
+    "username": "admin",
+    "password": "admin123",
+    "role": "admin",
+    "email": "admin@examportal.com",
+    "phone": "+91-9999999999"
+  },
+  {
+    "id": 2,
+    "name": "Riya Sharma",
+    "username": "student",
+    "password": "student123",
+    "role": "student",
+    "email": "riya@example.com",
+    "phone": "+91-8888888888",
+    "department": "Computer Science"
+  },
+  {
+    "id": 3,
+    "name": "Aarav Singh",
+    "username": "aarav",
+    "password": "aarav123",
+    "role": "student",
+    "email": "aarav@example.com",
+    "phone": "+91-7777777777",
+    "department": "IT"
+  }
+]

@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="glass-card p-4 rounded-4">
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <div>
+          <h3 class="fw-bold mb-1">Exam Result</h3>
+          <p class="text-muted-custom mb-0">Here is a summary of your assessment performance.</p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-primary" ng-click="downloadPdf()">Download PDF</button>
+          <button class="btn btn-primary" ng-click="printResult()">Print</button>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Score</p>
+            <h2 class="fw-bold">{{ result.score }}</h2>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Percentage</p>
+            <h2 class="fw-bold">{{ result.percentage }}%</h2>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Status</p>
+            <h2 class="fw-bold" ng-class="result.passed ? 'text-success' : 'text-danger'">{{ result.passed ? 'Pass' : 'Fail' }}</h2>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Time Taken</p>
+            <h2 class="fw-bold">{{ result.timeTaken }}s</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mt-2">
+        <div class="col-md-3">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Correct</p>
+            <h4 class="fw-bold text-success">{{ result.correctAnswers }}</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Wrong</p>
+            <h4 class="fw-bold text-danger">{{ result.wrongAnswers }}</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Unattempted</p>
+            <h4 class="fw-bold text-warning">{{ result.unattemptedQuestions }}</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="metric-card text-center">
+            <p class="text-muted-custom mb-1">Exam</p>
+            <h4 class="fw-bold">{{ result.examTitle }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
